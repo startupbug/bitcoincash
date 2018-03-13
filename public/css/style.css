@@ -3000,7 +3000,8 @@ button, input, select, textarea {
 
 .form-body button {
     font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: 600;
     color: #303e4f;
     text-shadow: 0.5px 0.866px 0px rgb(253, 210, 87);
     border-radius: 4px;
@@ -3077,8 +3078,7 @@ input#phone {
     margin: 0 auto;
 }
 .ubuntuR {
-    font-family: serif;
-    font-weight: 400;
+    font-weight: 600;
 }
 .textW {
     color: #ffffff !important;
@@ -3122,7 +3122,7 @@ section#block-block-11 {
     display: block;
 }
 h6.col-md-8.col-md-offset-2.textW{
-  font-size: 11px;
+  font-size: 13px;
   padding-left: 15px;
   padding-right: 15px;
 }
