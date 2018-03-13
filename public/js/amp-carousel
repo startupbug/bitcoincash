@@ -1,0 +1,958 @@
+(self.AMP = self.AMP || []).push({
+    n: "amp-carousel", v: "1509747505247", f: (function (AMP) {
+        var g;
+
+        function l(a, b) {
+            function c() {
+            }
+
+            c.prototype = b.prototype;
+            a.prototype = new c;
+            a.prototype.constructor = a;
+            for (var d in b) if (Object.defineProperties) {
+                var e = Object.getOwnPropertyDescriptor(b, d);
+                e && Object.defineProperty(a, d, e)
+            } else a[d] = b[d]
+        }
+
+        function m(a, b) {
+            return b.length > a.length ? !1 : 0 == a.lastIndexOf(b, 0)
+        };
+
+        function n(a, b) {
+            b = void 0 === b ? "" : b;
+            try {
+                return decodeURIComponent(a)
+            } catch (c) {
+                return b
+            }
+        };var aa = /(?:^[#?]?|&)([^=&]+)(?:=([^&]*))?/g;
+        Date.now();
+        self.log = self.log || {user: null, dev: null, userForEmbed: null};
+        var p = self.log;
+
+        function q() {
+            if (p.dev) return p.dev;
+            throw Error("failed to call initLogConstructor");
+        };
+
+        function ba(a) {
+            if (a.nodeType) {
+                var b = (a.ownerDocument || a).defaultView;
+                if (b = b != (b.__AMP_TOP || b) && r(b, "action") ? t(b, "action") : null) return b
+            }
+            b = u(a);
+            b = v(b);
+            return t(b, "action")
+        }
+
+        function w(a, b) {
+            a = a.__AMP_TOP || a;
+            return t(a, b)
+        }
+
+        function u(a) {
+            return a.nodeType ? w((a.ownerDocument || a).defaultView, "ampdoc").getAmpDoc(a) : a
+        }
+
+        function v(a) {
+            a = u(a);
+            return a.isSingleDoc() ? a.win : a
+        }
+
+        function t(a, b) {
+            r(a, b);
+            var c = x(a);
+            a = c[b];
+            a.obj || (a.obj = new a.ctor(a.context), a.ctor = null, a.context = null, a.resolve && a.resolve(a.obj));
+            return a.obj
+        }
+
+        function y(a) {
+            var b = z(a);
+            if (b) return b;
+            var c, d = new Promise(function (a) {
+                c = a
+            });
+            x(a)["amp-analytics-instrumentation"] = {obj: null, promise: d, resolve: c, context: null, ctor: null};
+            return d
+        }
+
+        function z(a) {
+            var b = x(a)["amp-analytics-instrumentation"];
+            if (b) {
+                if (b.promise) return b.promise;
+                t(a, "amp-analytics-instrumentation");
+                return b.promise = Promise.resolve(b.obj)
+            }
+            return null
+        }
+
+        function x(a) {
+            var b = a.services;
+            b || (b = a.services = {});
+            return b
+        }
+
+        function r(a, b) {
+            a = a.services && a.services[b];
+            return !(!a || !a.ctor && !a.obj)
+        };
+
+        /*
+ https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
+        function A(a) {
+            return a.ampExtendedElements ? !!a.ampExtendedElements["amp-analytics"] : !1
+        }
+
+        function ca(a) {
+            var b = u(a), c = z(v(a));
+            return c ? c : Promise.resolve().then(function () {
+                return A(b.win) ? y(v(a)) : b.whenBodyAvailable().then(function () {
+                    return A(b.win) ? y(v(a)) : null
+                })
+            })
+        };
+
+        function B(a) {
+            return w(a, "timer")
+        };
+
+        function da(a) {
+            a:{
+                var b;
+                try {
+                    b = a.document.cookie
+                } catch (k) {
+                    b = ""
+                }
+                if (a = b) for (a = a.split(";"), b = 0; b < a.length; b++) {
+                    var c = a[b].trim(), d = c.indexOf("="), e;
+                    if (e = -1 != d) e = c.substring(0, d).trim(), e = "AMP_EXP" == n(e, void 0);
+                    if (e) {
+                        a = c.substring(d + 1).trim();
+                        a = n(a, a);
+                        break a
+                    }
+                }
+                a = null
+            }
+            var f = a, h = f ? f.split(/\s*,\s*/g) : [];
+            a = Object.create(null);
+            for (b = 0; b < h.length; b++) 0 != h[b].length && ("-" == h[b][0] ? a[h[b].substr(1)] = !1 : a[h[b]] = !0);
+            return a
+        };var C, D = "Webkit webkit Moz moz ms O o".split(" ");
+
+        function E(a, b) {
+            var c = void 0;
+            if (m(b, "--")) return b;
+            C || (C = Object.create(null));
+            var d = C[b];
+            if (!d || c) {
+                d = b;
+                if (void 0 === a[b]) {
+                    var e = b.charAt(0).toUpperCase() + b.slice(1);
+                    a:{
+                        for (var f = 0; f < D.length; f++) {
+                            var h = D[f] + e;
+                            if (void 0 !== a[h]) {
+                                e = h;
+                                break a
+                            }
+                        }
+                        e = ""
+                    }
+                    var k = e;
+                    void 0 !== a[k] && (d = k)
+                }
+                c || (C[b] = d)
+            }
+            return d
+        }
+
+        function F(a, b) {
+            var c, d = E(a.style, "order");
+            d && (a.style[d] = c ? b + c : b)
+        }
+
+        function ea(a) {
+            var b = E(a.style, "scrollSnapType");
+            if (b) return a.style[b]
+        };
+
+        function G(a, b, c) {
+            ca(a).then(function (d) {
+                d && d.triggerEventForTarget(a, b, c)
+            })
+        };
+
+        function H(a, b, c, d) {
+            var e = new I(0, 0, a, b, c, d, 1, 1);
+            return e.solveYValueFromXValue.bind(e)
+        }
+
+        function I(a, b, c, d, e, f, h, k) {
+            this.x0 = a;
+            this.y0 = b;
+            this.x1 = c;
+            this.y1 = d;
+            this.x2 = e;
+            this.y2 = f;
+            this.x3 = h;
+            this.y3 = k
+        }
+
+        g = I.prototype;
+        g.solveYValueFromXValue = function (a) {
+            return this.getPointY(this.solvePositionFromXValue(a))
+        };
+        g.solvePositionFromXValue = function (a) {
+            var b = 1E-6, c = (a - this.x0) / (this.x3 - this.x0);
+            if (0 >= c) return 0;
+            if (1 <= c) return 1;
+            for (var d = 0, e = 1, f = 0, h = 0; 8 > h; h++) {
+                var f = this.getPointX(c), k = (this.getPointX(c + b) - f) / b;
+                if (Math.abs(f - a) < b) return c;
+                if (Math.abs(k) < b) break; else f < a ? d = c : e = c, c -= (f - a) / k
+            }
+            for (h = 0; Math.abs(f - a) > b && 8 > h; h++) f < a ? (d = c, c = (c + e) / 2) : (e = c, c = (c + d) / 2), f = this.getPointX(c);
+            return c
+        };
+        g.getPointX = function (a) {
+            if (0 == a) return this.x0;
+            if (1 == a) return this.x3;
+            var b = this.lerp(this.x0, this.x1, a), c = this.lerp(this.x1, this.x2, a),
+                d = this.lerp(this.x2, this.x3, a), b = this.lerp(b, c, a), c = this.lerp(c, d, a);
+            return this.lerp(b, c, a)
+        };
+        g.getPointY = function (a) {
+            if (0 == a) return this.y0;
+            if (1 == a) return this.y3;
+            var b = this.lerp(this.y0, this.y1, a), c = this.lerp(this.y1, this.y2, a),
+                d = this.lerp(this.y2, this.y3, a), b = this.lerp(b, c, a), c = this.lerp(c, d, a);
+            return this.lerp(b, c, a)
+        };
+        g.lerp = function (a, b, c) {
+            return a + c * (b - a)
+        };
+        var fa = H(.25, .1, .25, 1), ga = H(.42, 0, 1, 1), ha = H(0, 0, .58, 1), ia = H(.42, 0, .58, 1), ja = {
+            linear: function (a) {
+                return a
+            }, ease: fa, "ease-in": ga, "ease-out": ha, "ease-in-out": ia
+        };
+
+        function J(a) {
+            if (!a) return null;
+            if ("string" == typeof a) {
+                if (-1 != a.indexOf("cubic-bezier")) {
+                    var b = a.match(/cubic-bezier\((.+)\)/);
+                    if (b && (b = b[1].split(",").map(parseFloat), 4 == b.length)) {
+                        for (var c = 0; 4 > c; c++) if (isNaN(b[c])) return null;
+                        return H(b[0], b[1], b[2], b[3])
+                    }
+                    return null
+                }
+                return ja[a]
+            }
+            return a
+        };
+
+        function ka() {
+        }
+
+        function K(a, b) {
+            this.A = a;
+            (a = b) || (a = w(self, "vsync"));
+            this.o = a;
+            this.Y = null;
+            this.g = []
+        }
+
+        function L(a, b, c, d) {
+            return (new K(a)).setCurve(d).add(0, b, 1).start(c)
+        }
+
+        K.prototype.setCurve = function (a) {
+            a && (this.Y = J(a));
+            return this
+        };
+        K.prototype.add = function (a, b, c, d) {
+            this.g.push({delay: a, func: b, duration: c, curve: J(d)});
+            return this
+        };
+        K.prototype.start = function (a) {
+            var b = new M(this.o, this.A, this.g, this.Y, a);
+            a = b;
+            a.ba = Date.now();
+            a.L = !0;
+            a.o.canAnimate(a.A) ? a.da(a.ca) : (q().warn("Animation", "cannot animate"), N(a, !1, 0));
+            return b
+        };
+
+        function M(a, b, c, d, e) {
+            var f = this;
+            this.o = a;
+            this.A = b;
+            this.g = [];
+            for (b = 0; b < c.length; b++) {
+                var h = c[b];
+                this.g.push({
+                    delay: h.delay,
+                    func: h.func,
+                    duration: h.duration,
+                    curve: h.curve || d,
+                    started: !1,
+                    completed: !1
+                })
+            }
+            this.ea = e;
+            this.la = this.ka = this.ba = 0;
+            this.L = !1;
+            this.ca = {};
+            this.aa = new Promise(function (a, b) {
+                f.ga = a;
+                f.fa = b
+            });
+            this.da = this.o.createAnimTask(this.A, {mutate: this.ha.bind(this)})
+        }
+
+        M.prototype.then = function (a, b) {
+            return a || b ? this.aa.then(a, b) : this.aa
+        };
+        M.prototype.thenAlways = function (a) {
+            a = a || ka;
+            return this.then(a, a)
+        };
+        M.prototype.halt = function (a) {
+            N(this, !1, a || 0)
+        };
+
+        function N(a, b, c) {
+            if (a.L) {
+                a.L = !1;
+                if (0 != c) {
+                    1 < a.g.length && a.g.sort(function (a, b) {
+                        return a.delay + a.duration - (b.delay + b.duration)
+                    });
+                    try {
+                        if (0 < c) for (c = 0; c < a.g.length; c++) a.g[c].func(1, !0); else for (var d = a.g.length - 1; 0 <= d; d--) a.g[d].func(0, !1)
+                    } catch (e) {
+                        q().error("Animation", "completion failed: " + e, e), b = !1
+                    }
+                }
+                b ? a.ga() : a.fa()
+            }
+        }
+
+        M.prototype.ha = function () {
+            if (this.L) {
+                for (var a = Date.now(), b = Math.min((a - this.ba) / this.ea, 1), c = 0; c < this.g.length; c++) {
+                    var d = this.g[c];
+                    !d.started && b >= d.delay && (d.started = !0)
+                }
+                for (c = 0; c < this.g.length; c++) if (d = this.g[c], d.started && !d.completed) a:{
+                    var e, f;
+                    if (0 < d.duration) {
+                        if (e = f = Math.min((b - d.delay) / d.duration, 1), d.curve && 1 != e) try {
+                            e = d.curve(f)
+                        } catch (h) {
+                            q().error("Animation", "step curve failed: " + h, h);
+                            N(this, !1, 0);
+                            break a
+                        }
+                    } else e = f = 1;
+                    1 == f && (d.completed = !0);
+                    try {
+                        d.func(e, d.completed)
+                    } catch (h) {
+                        q().error("Animation",
+                            "step mutate failed: " + h, h), N(this, !1, 0)
+                    }
+                }
+                1 == b ? N(this, !0, 0) : this.o.canAnimate(this.A) ? this.da(this.ca) : (q().warn("Animation", "cancel animation"), N(this, !1, 0))
+            }
+        };
+
+        function O(a, b) {
+            return function (c) {
+                return a + (b - a) * c
+            }
+        };
+
+        function P(a) {
+            a = AMP.BaseElement.call(this, a) || this;
+            a.l = null;
+            a.h = null;
+            a.V = !1;
+            return a
+        }
+
+        l(P, AMP.BaseElement);
+        g = P.prototype;
+        g.buildCallback = function () {
+            (this.V = this.element.hasAttribute("controls")) && this.element.classList.add("i-amphtml-carousel-has-controls");
+            this.buildCarousel();
+            this.buildButtons();
+            this.setupGestures();
+            this.setControlsState()
+        };
+        g.viewportCallback = function (a) {
+            this.onViewportCallback(a);
+            a && this.hintControls()
+        };
+        g.onViewportCallback = function () {
+        };
+        g.buildButtons = function () {
+            var a = this;
+            this.l = this.element.ownerDocument.createElement("div");
+            this.l.classList.add("amp-carousel-button");
+            this.l.classList.add("amp-carousel-button-prev");
+            this.l.setAttribute("role", "button");
+            this.element.hasAttribute("data-previous-button-aria-label") ? this.l.setAttribute("aria-label", this.element.getAttribute("data-previous-button-aria-label")) : this.l.setAttribute("aria-label", "Previous item in carousel");
+            this.l.setAttribute("tabindex", 0);
+            this.l.onkeydown = function (b) {
+                13 !=
+                b.keyCode && 32 != b.keyCode || b.defaultPrevented || (b.preventDefault(), a.interactionPrev())
+            };
+            this.l.onclick = function () {
+                a.interactionPrev()
+            };
+            this.element.appendChild(this.l);
+            this.h = this.element.ownerDocument.createElement("div");
+            this.h.classList.add("amp-carousel-button");
+            this.h.classList.add("amp-carousel-button-next");
+            this.h.setAttribute("role", "button");
+            this.element.hasAttribute("data-next-button-aria-label") ? this.h.setAttribute("aria-label", this.element.getAttribute("data-next-button-aria-label")) :
+                this.h.setAttribute("aria-label", "Next item in carousel");
+            this.h.setAttribute("tabindex", 0);
+            this.h.onkeydown = function (b) {
+                13 != b.keyCode && 32 != b.keyCode || b.defaultPrevented || (b.preventDefault(), a.interactionNext())
+            };
+            this.h.onclick = function () {
+                a.interactionNext()
+            };
+            this.element.appendChild(this.h)
+        };
+        g.prerenderAllowed = function () {
+            return !0
+        };
+        g.isRelayoutNeeded = function () {
+            return !0
+        };
+        g.buildCarousel = function () {
+        };
+        g.setupGestures = function () {
+        };
+        g.go = function (a, b, c) {
+            c = void 0 === c ? !1 : c;
+            this.goCallback(a, b, c)
+        };
+        g.goCallback = function () {
+        };
+        g.setControlsState = function () {
+            this.l.classList.toggle("amp-disabled", !this.hasPrev());
+            this.l.setAttribute("aria-disabled", !this.hasPrev());
+            this.h.classList.toggle("amp-disabled", !this.hasNext());
+            this.h.setAttribute("aria-disabled", !this.hasNext())
+        };
+        g.hintControls = function () {
+            var a = this;
+            !this.V && this.isInViewport() && this.getVsync().mutate(function () {
+                a.element.classList.add("i-amphtml-carousel-button-start-hint");
+                B(a.win).delay(function () {
+                    a.deferMutate(function () {
+                        return a.element.classList.remove("i-amphtml-carousel-button-start-hint")
+                    })
+                }, 4E3)
+            })
+        };
+        g.unlayoutCallback = function () {
+            return !0
+        };
+        g.hasPrev = function () {
+        };
+        g.hasNext = function () {
+        };
+        g.interactionNext = function () {
+            this.h.classList.contains("amp-disabled") || this.go(1, !0, !1)
+        };
+        g.interactionPrev = function () {
+            this.l.classList.contains("amp-disabled") || this.go(-1, !0, !1)
+        };
+
+        function Q(a) {
+            a = P.call(this, a) || this;
+            a.G = null;
+            a.I = !1;
+            a.Z = !1;
+            a.X = 5E3;
+            a.shouldLoop = !1;
+            a.T = !1;
+            return a
+        }
+
+        l(Q, P);
+        g = Q.prototype;
+        g.buildCarousel = function () {
+            this.I = this.element.hasAttribute("loop");
+            this.Z = this.element.hasAttribute("autoplay");
+            this.buildSlides();
+            this.shouldLoop = this.I && this.isLoopingEligible();
+            if (this.T = this.Z && this.isLoopingEligible()) {
+                var a = Number(this.element.getAttribute("delay"));
+                0 < a && (this.X = Math.max(1E3, a));
+                this.I || (this.element.setAttribute("loop", ""), this.shouldLoop = this.I = !0)
+            }
+        };
+        g.buildSlides = function () {
+        };
+        g.onViewportCallback = function (a) {
+            this.updateViewportState(a);
+            a ? R(this) : this.clearAutoplay()
+        };
+        g.goCallback = function (a, b, c) {
+            this.moveSlide(a, b);
+            c ? R(this) : this.clearAutoplay()
+        };
+        g.moveSlide = function () {
+        };
+        g.updateViewportState = function () {
+        };
+        g.isLoopingEligible = function () {
+            return !1
+        };
+
+        function R(a) {
+            a.T && (a.clearAutoplay(), a.G = B(a.win).delay(a.go.bind(a, 1, !0, !0), a.X))
+        }
+
+        g.clearAutoplay = function () {
+            null !== this.G && (B(this.win).cancel(this.G), this.G = null)
+        };
+
+        function S(a) {
+            a = Q.call(this, a) || this;
+            a.o = null;
+            a.u = !1;
+            a.c = [];
+            a.i = 0;
+            a.b = null;
+            a.w = [];
+            a.D = !1;
+            a.C = null;
+            a.F = null;
+            a.O = !1;
+            a.B = 0;
+            a.a = null;
+            a.$ = 0;
+            a.s = 0;
+            a.K = 0;
+            a.N = [];
+            var b = w(a.win, "platform");
+            a.J = b.isIos();
+            a.W = null;
+            var c;
+            var d = a.win;
+            if (d.__AMP__EXPERIMENT_TOGGLES) c = d.__AMP__EXPERIMENT_TOGGLES; else {
+                d.__AMP__EXPERIMENT_TOGGLES = Object.create(null);
+                c = d.__AMP__EXPERIMENT_TOGGLES;
+                if (d.AMP_CONFIG) for (var e in d.AMP_CONFIG) {
+                    var f = d.AMP_CONFIG[e];
+                    "number" === typeof f && 0 <= f && 1 >= f && (c[e] = Math.random() < f)
+                }
+                if (d.AMP_CONFIG &&
+                    Array.isArray(d.AMP_CONFIG["allow-doc-opt-in"]) && 0 < d.AMP_CONFIG["allow-doc-opt-in"].length && (e = d.AMP_CONFIG["allow-doc-opt-in"], f = d.document.head.querySelector('meta[name="amp-experiments-opt-in"]'))) for (var f = f.getAttribute("content").split(","), h = 0; h < f.length; h++) -1 != e.indexOf(f[h]) && (c[f[h]] = !0);
+                Object.assign(c, da(d));
+                if (d.AMP_CONFIG && Array.isArray(d.AMP_CONFIG["allow-url-opt-in"]) && 0 < d.AMP_CONFIG["allow-url-opt-in"].length) {
+                    e = d.AMP_CONFIG["allow-url-opt-in"];
+                    f = d.location.originalHash || d.location.hash;
+                    d = Object.create(null);
+                    if (f) for (var k; k = aa.exec(f);) h = n(k[1], k[1]).trim(), k = k[2] ? n(k[2], k[2]).trim() : "", d[h] = k;
+                    for (f = 0; f < e.length; f++) h = d["e-" + e[f]], "1" == h && (c[e[f]] = !0), "0" == h && (c[e[f]] = !1)
+                }
+            }
+            a.U = !!c["slidescroll-disable-css-snap"] && m(w(a.win, "platform").getIosVersionString(), "10.3");
+            return a
+        }
+
+        l(S, Q);
+        g = S.prototype;
+        g.isLayoutSupported = function (a) {
+            return "fixed" == a || "fixed-height" == a || "responsive" == a || "fill" == a || "flex-item" == a || "fluid" == a
+        };
+        g.buildSlides = function () {
+            var a = this;
+            this.o = this.getVsync();
+            this.W = ba(this.element);
+            this.u = void 0 != ea(this.element);
+            this.U && (this.u = !1);
+            this.element.classList.add("i-amphtml-slidescroll");
+            this.c = this.getRealChildren();
+            this.i = this.c.length;
+            this.b = this.win.document.createElement("div");
+            this.b.classList.add("i-amphtml-slides-container");
+            this.b.setAttribute("aria-live", "polite");
+            this.U && this.b.classList.add("i-amphtml-slidescroll-no-snap");
+            if (this.u) {
+                var b = this.win.document.createElement("div");
+                b.classList.add("i-amphtml-carousel-start-marker");
+                this.b.appendChild(b);
+                b = this.win.document.createElement("div");
+                b.classList.add("i-amphtml-carousel-end-marker");
+                this.b.appendChild(b)
+            }
+            this.element.appendChild(this.b);
+            this.c.forEach(function (b, d) {
+                a.N.push(b.getAttribute("data-slide-id") || d.toString());
+                a.setAsOwner(b);
+                b.classList.add("amp-carousel-slide");
+                var c = a.win.document.createElement("div");
+                c.classList.add("i-amphtml-slide-item");
+                a.b.appendChild(c);
+                d = c;
+                do {
+                    if (Node.prototype.getRootNode) d = d.getRootNode() || d; else for (; d.parentNode; d = d.parentNode) ;
+                    if (d.host) d = d.host; else break
+                } while (1);
+                c.appendChild(b);
+                a.w.push(c)
+            });
+            this.M();
+            this.b.addEventListener("scroll", this.R.bind(this));
+            this.b.addEventListener("touchmove", this.ja.bind(this));
+            this.b.addEventListener("touchend", this.ia.bind(this));
+            this.registerAction("goToSlide", function (b) {
+                var c = b.args;
+                c && a.showSlideWhenReady(c.index)
+            }, 100)
+        };
+        g.isLoopingEligible = function () {
+            return 2 < this.i
+        };
+        g.mutatedAttributesCallback = function (a) {
+            var b = a.slide;
+            void 0 !== b && this.showSlideWhenReady(b)
+        };
+        g.ja = function () {
+            this.clearAutoplay();
+            this.u && (this.O = !0, this.F && B(this.win).cancel(this.F))
+        };
+        g.ia = function () {
+            var a = this;
+            if (this.O) {
+                this.C && B(this.win).cancel(this.C);
+                var b = this.U ? 45 : 120;
+                this.F = B(this.win).delay(function () {
+                    var b = a.b.scrollLeft;
+                    a.D || (T(a, b), a.F = null)
+                }, b)
+            }
+            this.O = !1
+        };
+        g.onLayoutMeasure = function () {
+            this.s = this.getLayoutWidth();
+            null !== this.a && (this.b.scrollLeft = la(this, this.a));
+            this.K = this.b.scrollLeft
+        };
+        g.layoutCallback = function () {
+            null === this.a ? U(this, this.$) : this.scheduleLayout(this.c[this.a]);
+            return Promise.resolve()
+        };
+        g.unlayoutCallback = function () {
+            this.a = null;
+            return Q.prototype.unlayoutCallback.call(this)
+        };
+        g.updateViewportState = function (a) {
+            null !== this.a && this.updateInViewport(this.c[this.a], a)
+        };
+        g.hasPrev = function () {
+            return this.shouldLoop || 0 < this.a
+        };
+        g.hasNext = function () {
+            return this.shouldLoop || this.a < this.c.length - 1
+        };
+        g.moveSlide = function (a, b) {
+            if (null !== this.a) {
+                var c = this.hasNext(), d = this.hasPrev();
+                if (1 == a && c || -1 == a && d) {
+                    var e = this.a + a;
+                    -1 == e ? e = this.i - 1 : e >= this.i && (e = 0);
+                    b ? V(this, 1 != a || d ? this.s : 0, a) : ma(this, e)
+                }
+            }
+        };
+        g.R = function () {
+            var a = this;
+            this.C && B(this.win).cancel(this.C);
+            var b = this.b.scrollLeft;
+            this.J || na(this, b);
+            if (!this.F) {
+                var c = this.u ? 35 : this.J ? 45 : 100;
+                this.C = B(this.win).delay(function () {
+                    a.D || (a.u ? T(a, b) : V(a, b))
+                }, c)
+            }
+            this.K = b
+        };
+
+        function na(a, b) {
+            var c = a.b.scrollWidth;
+            -1 == a.B && b >= a.K ? V(a, b).then(function () {
+                a.B = 0
+            }) : 1 == a.B && b <= a.K ? V(a, b).then(function () {
+                a.B = 0
+            }) : a.B = 0 > b ? -1 : b + a.s > c ? 1 : 0
+        }
+
+        function V(a, b, c) {
+            a.D = !0;
+            var d, e = oa(a, b) - a.a, f = a.hasPrev();
+            0 != e || 1 != c && -1 != c || (e = c);
+            if (0 == e) d = f ? a.s : 0; else if (1 == e || -1 != e && e == -1 * (a.i - 1)) d = f ? 2 * a.s : a.s; else if (-1 == e || e == a.i - 1) d = 0;
+            return pa(a, b, d).then(function () {
+                T(a, d)
+            })
+        }
+
+        function oa(a, b) {
+            var c = Math.round(b / a.s), d = 0;
+            b = a.hasPrev();
+            var e = a.hasNext();
+            b && e ? d = c - 1 : e ? d = c : b && (d = c - 1);
+            b = a.a + d;
+            return b = a.shouldLoop ? 0 > b ? a.i - 1 : b >= a.i ? 0 : b : 0 > b ? 0 : b >= a.i ? a.i - 1 : b
+        }
+
+        function T(a, b) {
+            a.D = !0;
+            var c = oa(a, b);
+            a.o.mutate(function () {
+                a.J && a.b.classList.add("i-amphtml-no-scroll");
+                ma(a, c);
+                a.o.mutate(function () {
+                    a.J && a.b.classList.remove("i-amphtml-no-scroll");
+                    a.D = !1
+                })
+            })
+        }
+
+        g.showSlideWhenReady = function (a) {
+            var b = parseInt(a, 10);
+            isFinite(b) && 0 <= b && b < this.i ? null === this.a ? this.$ = b : U(this, b) : this.user().error("AMP-CAROUSEL", "Invalid [slide] value: %s", a)
+        };
+
+        function U(a, b) {
+            var c = a.i;
+            if (0 > b || b >= c || a.a == b) return !1;
+            var d = 0 <= b - 1 ? b - 1 : a.shouldLoop ? c - 1 : null, e = b + 1 < c ? b + 1 : a.shouldLoop ? 0 : null,
+                f = [];
+            null != d && f.push(d);
+            f.push(b);
+            null != e && f.push(e);
+            null !== a.a && a.updateInViewport(a.c[a.a], !1);
+            var h = a.c[b];
+            if (void 0 === h) {
+                var k = Error("Attempting to access a non-existant slide");
+                k.args = {index: b, noOfSlides: c};
+                q().error("AMP-CAROUSEL", k);
+                return !1
+            }
+            a.updateInViewport(h, !0);
+            f.forEach(function (c, d) {
+                a.shouldLoop && F(a.w[c], d + 1);
+                a.w[c].classList.add("i-amphtml-slide-item-show");
+                c == b ? (a.scheduleLayout(a.c[c]), a.scheduleResume(a.c[c]), a.c[c].setAttribute("aria-hidden", "false")) : (a.schedulePreload(a.c[c]), a.c[c].setAttribute("aria-hidden", "true"))
+            });
+            a.b.scrollLeft = la(a, b);
+            qa(a, b);
+            a.a = b;
+            ra(a, f);
+            a.setControlsState();
+            return !0
+        }
+
+        function ma(a, b) {
+            var c = U(a, b);
+            if (c) {
+                var d;
+                var e = a.win;
+                d = {index: b};
+                var f = {detail: d};
+                Object.assign(f, void 0);
+                "function" == typeof e.CustomEvent ? d = new e.CustomEvent("slidescroll.slideChange", f) : (e = e.document.createEvent("CustomEvent"), e.initCustomEvent("slidescroll.slideChange", !!f.bubbles, !!f.cancelable, d), d = e);
+                a.W.trigger(a.element, "slideChange", d, 100);
+                a.element.dispatchCustomEvent("slideChange", {index: b})
+            }
+        }
+
+        function la(a, b) {
+            var c = a.s;
+            a.shouldLoop || 0 != b || (c = 0);
+            return c
+        }
+
+        function ra(a, b) {
+            for (var c = a.i, d = 0; d < c; d++) a.w[d].classList.contains("i-amphtml-slide-item-show") && (b.includes(d) || (a.shouldLoop && F(a.w[d], ""), a.w[d].classList.remove("i-amphtml-slide-item-show"), a.c[d].removeAttribute("aria-hidden")), a.a != d && a.schedulePause(a.c[d]))
+        }
+
+        function pa(a, b, c) {
+            if (b == c) return Promise.resolve();
+            var d = O(b, c);
+            c = H(.4, 0, .2, 1);
+            var e = a.b;
+            return L(e, function (b) {
+                a.b.scrollLeft = d(b)
+            }, 80, c).thenAlways()
+        }
+
+        g.M = function () {
+            this.element.addEventListener("touchmove", function (a) {
+                a.stopPropagation()
+            })
+        };
+
+        function qa(a, b) {
+            var c = b - a.a;
+            if (0 != c) {
+                1 !== Math.abs(c) && (c = 0 > c ? 1 : -1, null === a.a && (c = 1));
+                var d = null === a.a ? "null" : a.N[a.a], e = {fromSlide: d, toSlide: a.N[b]};
+                G(a.element, "amp-carousel-change", e);
+                1 == c ? G(a.element, "amp-carousel-next", e) : G(a.element, "amp-carousel-prev", e)
+            }
+        };
+
+        function W(a) {
+            a = P.call(this, a) || this;
+            a.j = 0;
+            a.P = 0;
+            a.H = null;
+            a.m = null;
+            a.S = null;
+            return a
+        }
+
+        l(W, P);
+        g = W.prototype;
+        g.isLayoutSupported = function (a) {
+            return "fixed" == a || "fixed-height" == a
+        };
+        g.buildCarousel = function () {
+            var a = this;
+            this.H = this.getRealChildren();
+            this.m = this.element.ownerDocument.createElement("div");
+            this.m.classList.add("i-amphtml-scrollable-carousel-container");
+            this.element.appendChild(this.m);
+            this.H.forEach(function (b) {
+                a.setAsOwner(b);
+                b.classList.add("amp-carousel-slide");
+                b.classList.add("amp-scrollable-carousel-slide");
+                a.m.appendChild(b)
+            });
+            this.M();
+            this.m.addEventListener("scroll", this.R.bind(this))
+        };
+        g.layoutCallback = function () {
+            sa(this, this.j);
+            ta(this, this.j, 1);
+            this.setControlsState();
+            return Promise.resolve()
+        };
+        g.onViewportCallback = function () {
+            ua(this, this.j, this.j)
+        };
+        g.goCallback = function (a, b) {
+            var c = this, d = va(this, this.j, a), e = this.j;
+            if (d != e) if (b) {
+                var f = O(e, d);
+                L(this.element, function (a) {
+                    c.m.scrollLeft = f(a)
+                }, 200, "ease-in-out").thenAlways(function () {
+                    X(c, d)
+                })
+            } else X(this, d), this.m.scrollLeft = d
+        };
+        g.R = function () {
+            var a = this.m.scrollLeft;
+            this.j = a;
+            null === this.S && wa(this, a)
+        };
+
+        function wa(a, b) {
+            a.S = B(a.win).delay(function () {
+                30 > Math.abs(b - a.j) ? (a.S = null, X(a, a.j)) : wa(a, a.j)
+            }, 100)
+        }
+
+        function X(a, b) {
+            ua(a, b, a.P);
+            sa(a, b);
+            ta(a, b, Math.sign(b - a.P));
+            a.P = b;
+            a.j = b;
+            a.setControlsState()
+        }
+
+        function va(a, b, c) {
+            var d = a.element.offsetWidth, e = a.m.scrollWidth;
+            a = b + c * d;
+            return 0 > a ? 0 : e >= d && a > e - d ? e - d : a
+        }
+
+        function Y(a, b, c) {
+            for (var d = a.getLayoutWidth(), e = 0; e < a.H.length; e++) {
+                var f = a.H[e];
+                f.offsetLeft + f.offsetWidth >= b && f.offsetLeft <= b + d && c(f)
+            }
+        }
+
+        function sa(a, b) {
+            Y(a, b, function (b) {
+                a.scheduleLayout(b)
+            })
+        }
+
+        function ta(a, b, c) {
+            var d = va(a, b, c);
+            d != b && Y(a, d, function (b) {
+                a.schedulePreload(b)
+            })
+        }
+
+        function ua(a, b, c) {
+            var d = [];
+            Y(a, b, function (b) {
+                d.push(b);
+                a.updateInViewport(b, !0)
+            });
+            c != b && Y(a, c, function (b) {
+                d.includes(b) || (a.updateInViewport(b, !1), a.schedulePause(b))
+            })
+        }
+
+        g.hasPrev = function () {
+            return 0 != this.j
+        };
+        g.hasNext = function () {
+            var a = this.getLayoutWidth(), b = Math.max(this.m.scrollWidth - a, 0);
+            return this.j != b
+        };
+        g.M = function () {
+            this.element.addEventListener("touchmove", function (a) {
+                a.stopPropagation()
+            })
+        };
+
+        function Z(a) {
+            return AMP.BaseElement.apply(this, arguments) || this
+        }
+
+        l(Z, AMP.BaseElement);
+        Z.prototype.upgradeCallback = function () {
+            return "slides" == this.element.getAttribute("type") ? new S(this.element) : new W(this.element)
+        };
+        (function (a) {
+            a.registerElement("amp-carousel", Z, ".amp-carousel-slide>.i-amphtml-replaced-content{-o-object-fit:contain;object-fit:contain}.amp-carousel-button{position:absolute;box-sizing:border-box;top:50%;height:34px;width:34px;border-radius:2px;opacity:0;pointer-events:all;background-color:rgba(0,0,0,.5);background-position:50% 50%;background-repeat:no-repeat;-webkit-transform:translateY(-50%);transform:translateY(-50%);visibility:hidden;z-index:10}.amp-mode-mouse .amp-carousel-button,amp-carousel[controls] .amp-carousel-button{opacity:1;visibility:visible}.amp-carousel-button-prev{left:16px;background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff' viewBox='0 0 18 18'%3E%3Cpath d='M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z'/%3E%3C/svg%3E\");background-size:18px 18px}.amp-carousel-button-next{right:16px;background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%23fff' viewBox='0 0 18 18'%3E%3Cpath d='M9 3L7.94 4.06l4.19 4.19H3v1.5h9.13l-4.19 4.19L9 15l6-6z'/%3E%3C/svg%3E\");background-size:18px 18px}.i-amphtml-carousel-button-start-hint .amp-carousel-button:not(.amp-disabled){-webkit-animation:i-amphtml-carousel-hint 1s ease-in 3s 1 normal both;animation:i-amphtml-carousel-hint 1s ease-in 3s 1 normal both}.amp-mode-mouse .i-amphtml-carousel-button-start-hint .amp-carousel-button:not(.amp-disabled){-webkit-animation:none;animation:none}@-webkit-keyframes i-amphtml-carousel-hint{0%{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}@keyframes i-amphtml-carousel-hint{0%{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}amp-carousel .amp-carousel-button.amp-disabled{-webkit-animation:none;animation:none;opacity:0;visibility:hidden}.i-amphtml-slides-container{display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;-ms-flex-wrap:nowrap;flex-wrap:nowrap;height:100%!important;left:0;overflow-x:auto!important;overflow-y:hidden!important;position:absolute!important;top:0;width:100%!important;-webkit-scroll-snap-type:mandatory!important;scroll-snap-type:mandatory!important;padding-bottom:20px!important;box-sizing:content-box!important;-webkit-overflow-scrolling:touch!important}.i-amphtml-slides-container.i-amphtml-no-scroll{overflow-x:hidden!important}.i-amphtml-slide-item{-webkit-box-align:center!important;-ms-flex-align:center!important;align-items:center!important;display:none!important;-webkit-box-flex:0!important;-ms-flex:0 0 100%!important;flex:0 0 100%!important;height:100%!important;-webkit-box-pack:center!important;-ms-flex-pack:center!important;justify-content:center!important;position:relative!important;-webkit-scroll-snap-coordinate:0 0!important;scroll-snap-coordinate:0 0!important;width:100%!important}.i-amphtml-slide-item>*{height:100%;width:100%;overflow:hidden!important}.i-amphtml-slide-item-show{display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important}.i-amphtml-carousel-end-marker,.i-amphtml-carousel-start-marker{background-color:transparent!important;display:block!important;-webkit-box-flex:0!important;-ms-flex:0 0 1px!important;flex:0 0 1px!important;height:100%!important;position:relative!important;-webkit-scroll-snap-coordinate:0 0!important;scroll-snap-coordinate:0 0!important;width:1px!important}.i-amphtml-carousel-start-marker{-webkit-box-ordinal-group:0!important;-ms-flex-order:-1!important;order:-1!important;margin-left:-1px!important}.i-amphtml-carousel-end-marker{-webkit-box-ordinal-group:100000001!important;-ms-flex-order:100000000!important;order:100000000!important;margin-right:-1px!important}.i-amphtml-slidescroll-no-snap.i-amphtml-slides-container{-webkit-scroll-snap-type:none!important;scroll-snap-type:none!important}.i-amphtml-slidescroll-no-snap .i-amphtml-slide-item{-webkit-scroll-snap-coordinate:none!important;scroll-snap-coordinate:none!important}.i-amphtml-slidescroll-no-snap.i-amphtml-slides-container.i-amphtml-no-scroll{-webkit-overflow-scrolling:auto!important}.amp-scrollable-carousel-slide{display:inline-block!important;margin-left:8px}.amp-scrollable-carousel-slide:first-child{margin-left:0px}.i-amphtml-scrollable-carousel-container{white-space:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch!important}\n/*# sourceURL=/extensions/amp-carousel/0.1/amp-carousel.css*/")
+        })(self.AMP);
+    })
+});
+//# sourceMappingURL=amp-carousel-0.1.js.map
