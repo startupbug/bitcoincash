@@ -13,7 +13,7 @@
 @font-face {
     font-family: 'Conv_CamphorPro-Bold';
     src: url('../fonts/CamphorPro-Bold.eot');
-    src: local('â˜º'), url('../fonts/CamphorPro-Bold.woff') format('woff'), url('../fonts/CamphorPro-Bold.ttf') format('truetype'), url('../fonts/CamphorPro-Bold.svg') format('svg');
+    src: local('Ã¢ËœÂº'), url('../fonts/CamphorPro-Bold.woff') format('woff'), url('../fonts/CamphorPro-Bold.ttf') format('truetype'), url('../fonts/CamphorPro-Bold.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -21,7 +21,7 @@
 @font-face {
     font-family: 'Conv_CamphorPro-Medium';
     src: url('../fonts/CamphorPro-Medium.eot');
-    src: local('â˜º'), url('../fonts/CamphorPro-Medium.woff') format('woff'), url('../fonts/CamphorPro-Medium.ttf') format('truetype'), url('../fonts/CamphorPro-Medium.svg') format('svg');
+    src: local('Ã¢ËœÂº'), url('../fonts/CamphorPro-Medium.woff') format('woff'), url('../fonts/CamphorPro-Medium.ttf') format('truetype'), url('../fonts/CamphorPro-Medium.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -29,7 +29,7 @@
 @font-face {
     font-family: 'Conv_CamphorPro-Light';
     src: url('../fonts/CamphorPro-Light.eot');
-    src: local('â˜º'), url('../fonts/CamphorPro-Light.woff') format('woff'), url('../fonts/CamphorPro-Light.ttf') format('truetype'), url('../fonts/CamphorPro-Light.svg') format('svg');
+    src: local('Ã¢ËœÂº'), url('../fonts/CamphorPro-Light.woff') format('woff'), url('../fonts/CamphorPro-Light.ttf') format('truetype'), url('../fonts/CamphorPro-Light.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -3046,11 +3046,12 @@ input#phone {
 }
 .headline h1 {
     font-size: 40px;
-    font-weight: 900;
+    font-weight: 500;
     padding: 0;
     color: #fff;
     /* margin: 0 0 10px 0; */
     text-align: center;
+    text-transform: uppercase;
 }
 .headline h2 {
     font-size: 35px;
