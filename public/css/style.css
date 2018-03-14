@@ -3027,7 +3027,7 @@ span.text-white {
 }
 .progbar {
     position: absolute;
-    left: 28%;
+    left: 16%;
     top: -11%;
 }
 .form-body {
@@ -3127,6 +3127,28 @@ h6.col-md-8.col-md-offset-2.textW{
   padding-left: 15px;
   padding-right: 15px;
 }
+.checked {
+    color: white;
+}
+.rating1{
+  margin-left: 120px;
+}
+.rating1 span.fa{
+  font-size: 21px;
+}
+.rating2{
+  margin-left: 380px;
+}
+.rating2 span.fa{
+  font-size: 21px;
+}
+.rating3{
+  margin-left: 250px;
+}
+.rating3 span.fa{
+  font-size: 21px;
+}
+
 @media (min-width: 1200px){
   .container {
       width: 1260px;
