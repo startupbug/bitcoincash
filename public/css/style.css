@@ -2302,8 +2302,7 @@ section#slider {
     /*align-content: center;*/
     padding-top: 25px;
     position: relative;
-    height: 620px;
-
+    height: 640px;
     /*background: url(../images/slider_one.jpg);*/
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
@@ -3131,7 +3130,7 @@ h6.col-md-8.col-md-offset-2.textW{
     color: white;
 }
 .rating1{
-  margin-left: 120px;
+  margin-left: 60px;
 }
 .rating1 span.fa{
   font-size: 21px;
@@ -3143,7 +3142,7 @@ h6.col-md-8.col-md-offset-2.textW{
   font-size: 21px;
 }
 .rating3{
-  margin-left: 250px;
+  margin-left: 340px;
 }
 .rating3 span.fa{
   font-size: 21px;
@@ -3164,4 +3163,7 @@ h6.col-md-8.col-md-offset-2.textW{
   .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
     float: left;
   }
+}
+.column.left_one.aos-init.aos-animate {
+    margin-top: -17px;
 }
