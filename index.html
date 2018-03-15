@@ -733,13 +733,22 @@
 <script src="./public/js/custom.js"></script>
 <script src="./public/customjs/intlTelInput.js"></script>
 <script>
-    $('.accordion-title').click(function(){
+
+    $(document.body).click( function(e) {
+      $('#faq_id li .accordion-title').siblings().css("display", "none");
+      $('#faq_id li .accordion-title').parent().removeClass( 'is-active' );
+    });
+
+    $('.accordion-title').click(function(e){
       $('#faq_id li .accordion-title').siblings().css("display", "none");
       $('#faq_id li .accordion-title').parent().removeClass( 'is-active' );
 
       $(this).siblings().toggle();
       $(this).parent().toggleClass( 'is-active' );
+
+      e.stopPropagation();
     });
+
 
     $("#phone").intlTelInput({
       utilsScript: "./public/customjs/utils.js"

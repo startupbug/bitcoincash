@@ -1,12 +1,12 @@
 $(document).ready(function(){
-    setInterval(function(){
-        var index = getRandomInt(0, 27);
-        $('#slider').hide();
-        var img = ''
-        $('#slider').html('<img src="public/images/logos/' + winners[index].service + '.png " alt="' + winners[index].service + '"><span>' + winners[index].name + ' has just made $'+ winners[index].amount + ' in <span class="service">' + winners[index].service + '</span></span>');
-        $('#slider').fadeIn('slow');
+  setInterval(function(){
+      var index = getRandomInt(0, 27);
+      $('#slider').hide();
+      var img = ''
+      $('#slider').html('<img src="public/images/logos/' + winners[index].service + '.png " alt="' + winners[index].service + '"><span>' + winners[index].name + ' has just made $'+ winners[index].amount + ' in <span class="service">' + winners[index].service + '</span></span>');
+      $('#slider').fadeIn('slow');
 
-    }, 5000);
+  }, 5000);
 });
 function getRandomInt(min, max) {
     min = Math.ceil(min);
