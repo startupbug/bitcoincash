@@ -1027,16 +1027,15 @@ section#faq .button-register {
     border: 1px solid #898989 !important;
 }
 
-.footer a.text-center {
+.footer a.text-left {
     display: block;
     float: none !important;
     padding: 9px 8px;
 }
 
-.footer a.text-center amp-img {
+.footer a.text-left amp-img {
     float: none;
     text-align: center;
-    margin: 0px auto;
 }
 
 .footer-socials .email_support {
