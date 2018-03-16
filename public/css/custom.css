@@ -13,6 +13,13 @@ body {
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%
 }
+@font-face {
+    font-family: 'times-new-roman';
+    src: url('../fonts/times-new-roman.ttf');
+    src: local('Ã¢ËœÂº'), url('../fonts/times-new-roman.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'Conv_CamphorPro-Bold';
@@ -808,7 +815,7 @@ body {
 .main_heading {
     font-family: 'Conv_CamphorPro-Bold';
     font-weight: bold !important;
-    padding: 10px 30px;
+    padding: 12px 0px 0px 0px;
 }
 
 header {
@@ -1428,3 +1435,17 @@ div#slider.content .slider-img {
 .bluebg-content {
     padding: 10px 10px 20px 10px;
 }
+.bluebg-content-star {
+    padding: 10px 10px 6px 10px !important;
+}
+.color-white{
+  color: white;
+  font-family: times-new-roman;
+  font-size: 18px;
+}
+.rate-font{
+  color: white;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+/* uppercase */

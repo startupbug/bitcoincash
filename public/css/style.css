@@ -11,6 +11,14 @@
 **************************/
 
 @font-face {
+    font-family: 'times-new-roman';
+    src: url('../fonts/times-new-roman.ttf');
+    src: local('Ã¢ËœÂº'), url('../fonts/times-new-roman.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Conv_CamphorPro-Bold';
     src: url('../fonts/CamphorPro-Bold.eot');
     src: local('Ã¢ËœÂº'), url('../fonts/CamphorPro-Bold.woff') format('woff'), url('../fonts/CamphorPro-Bold.ttf') format('truetype'), url('../fonts/CamphorPro-Bold.svg') format('svg');
@@ -2302,7 +2310,7 @@ section#slider {
     /*align-content: center;*/
     padding-top: 25px;
     position: relative;
-    height: 640px;
+    height: 700px;
     /*background: url(../images/slider_one.jpg);*/
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
@@ -3050,7 +3058,7 @@ input#phone {
     color: #fff;
     /* margin: 0 0 10px 0; */
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 .headline h2 {
     font-size: 35px;
@@ -3156,6 +3164,11 @@ h6.col-md-8.col-md-offset-2.textW{
 @media (min-width: 992px){
   .col-md-4 {
       width: 33.33333333%;
+      float: left;
+  }
+  .c-md-1 {
+    width: 33.333333%;
+    float: left;
   }
 }
 @media (min-width: 768px){
@@ -3166,4 +3179,16 @@ h6.col-md-8.col-md-offset-2.textW{
 }
 .column.left_one.aos-init.aos-animate {
     margin-top: -17px;
+}
+.color-white{
+  color: white;
+  font-family: times-new-roman;
+  font-size: 18px;
+}
+.s-text-bold
+{
+  font-weight: 600;
+}
+.rate-font{
+  font-size: 20px;
 }
