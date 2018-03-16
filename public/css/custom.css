@@ -856,7 +856,7 @@ header .column {
     font-size: 14px;
     color: #989fa7 !important;
     float: left;
-    margin-left: 15px;
+    margin-left: 45px;
 }
 
 .icon-text img {
@@ -1438,14 +1438,14 @@ div#slider.content .slider-img {
 .bluebg-content-star {
     padding: 10px 10px 6px 10px !important;
 }
-.color-white{
+.s-color-white{
   color: white;
   font-family: times-new-roman;
-  font-size: 18px;
+  font-size: 16px;
 }
 .rate-font{
   color: white;
-  font-size: 20px;
+  font-size: 16px;
   padding-bottom: 10px;
 }
 /* uppercase */
